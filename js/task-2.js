@@ -1,11 +1,13 @@
 function getShippingMessage(country, price, deliveryFee) {
   if (
     !(typeof country === 'string') ||
-    !Number.isInteger(price) ||
-    !Number.isInteger(deliveryFee)
+    typeof price !== 'number' ||
+    isNaN(price) ||
+    typeof deliveryFee !== 'number' ||
+    isNaN(deliveryFee)
   )
     throw new TypeError(
-      `Expected str and two ints, got: ${typeof country}, ${typeof price}, ${typeof deliveryFee}`
+      `Expected str and two numbers, got: ${typeof country}, ${typeof price}, ${typeof deliveryFee}`
     );
 
   return `Shipping to ${country} will cost ${price + deliveryFee} credits`;
